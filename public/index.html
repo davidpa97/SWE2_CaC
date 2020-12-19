@@ -1,0 +1,33 @@
+<html>
+
+<head>
+  <title>Command and Control</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+  <h1>Welcome to Command and Control!</h1>
+  <p>Refresh the page to see new heartbeats.</p>
+  <ul id="heartbeats"></ul>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script>
+    $(document).ready(()=>{
+      $.ajax({
+        url: '/api/heartbeats/',
+        method: 'GET',
+        success: data =>{
+          console.log(data);
+          for(let i = 0; i < data.length; i++){
+            $('#heartbeats').append(`<li>data sent: ${data[i].sentTime} <br> data received: ${data[i].receivedTime} </li> <br>`)
+          }
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>

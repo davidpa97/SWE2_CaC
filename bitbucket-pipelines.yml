@@ -1,0 +1,53 @@
+# This is a sample build configuration for JavaScript.
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: node:10.15.3
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script: 
+          - echo "Starting NPM Install..."
+          - npm install
+          - echo "Starting Testing..."
+          - npm test
+        services:
+          - database
+  branches:
+    in-dev:
+    - step:
+        deployment: Development
+        caches:
+          - node
+        script:
+          - echo "Deploying to Dev Digital Ocean..."
+          - echo "SSHing..."
+          - pipe: atlassian/ssh-run:0.2.2
+            variables:
+              SSH_USER: 'cicd'
+              SERVER: 'team21.softwareengineeringii.com'
+              MODE: 'command'
+              COMMAND: '~/update_cic.sh'
+    master:
+    - step:
+        deployment: Staging
+        caches:
+          - node
+        script:
+          - echo "Deploying to Staging Digital Ocean..."
+          - echo "SSHing..."
+          - pipe: atlassian/ssh-run:0.2.2
+            variables:
+              SSH_USER: 'cicd'
+              SERVER: 'team21-staging.softwareengineeringii.com'
+              MODE: 'command'
+              COMMAND: '~/update_cic.sh'
+definitions:
+  services:
+    database:
+      image: mongo
+
