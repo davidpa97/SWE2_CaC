@@ -1,5 +1,3 @@
-# command_and_control
-
 # Command and Control API
 **Boilerplate by Jacob Beneski**<br>
 **Maintained/Implemented by David Padilla-Arenivar**
