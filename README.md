@@ -1,8 +1,8 @@
 # command_and_control
 
-#Command and Control API File
-Boilerplate by Jacob Beneski<br>
-Maintained  by David Padilla-Arenivar
+# Command and Control API
+**Boilerplate by Jacob Beneski**<br>
+**Maintained/Implemented by David Padilla-Arenivar**
 
 *This repository is a small part of a team-based project for my Software Engineering II
 course at St. Edward's University, and involved creating a cloud-based system to track
